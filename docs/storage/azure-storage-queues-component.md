@@ -28,7 +28,7 @@ dotnet add package Aspire.Azure.Storage.Queues --prerelease
 
 ---
 
-For more information, see [dotnet add package](/dotnet/core/tools/dotnet-add-package.md) or [Manage package dependencies in .NET applications](/dotnet/core/tools/dependencies.md).
+For more information, see [dotnet add package](/dotnet/core/tools/dotnet-add-package) or [Manage package dependencies in .NET applications](/dotnet/core/tools/dependencies).
 
 ## Example usage
 
@@ -134,11 +134,11 @@ builder.AddAzureQueueService(
 In your orchestrator project, add a Storage Queue connection and consume the connection using the following methods, such as <xref:Aspire.Hosting.AzureResourceExtensions.AddAzureStorage%2A>:
 
 ```csharp
-var queue = builder.AddAzureStorage("storage")
-    .AddQueues("queue");
+var queues = builder.AddAzureStorage("storage")
+    .AddQueues("queues");
 
 var exampleProject = builder.AddProject<Projects.ExampleProject>()
-    .WithReference(queue);
+    .WithReference(queues);
 ```
 
 The <xref:Aspire.Hosting.AzureResourceExtensions.AddQueues%2A> method will read connection information from the AppHost's configuration (for example, from "user secrets") under the `ConnectionStrings:queue` config key. The <xref:Aspire.Hosting.ResourceBuilderExtensions.WithReference%2A> method passes that connection information into a connection string named queue in the `ExampleProject` project. In the _Program.cs_ file of `ExampleProject`, the connection can be consumed using:
